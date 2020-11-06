@@ -47,7 +47,7 @@ const ReadMore = memo(
     const onTextLayout = useCallback(
       ({
         nativeEvent: {
-          layout: {height},
+          layout: { height },
         },
       }) => {
         setTextHeight(height);
@@ -58,7 +58,7 @@ const ReadMore = memo(
     const onHiddenTextLayout = useCallback(
       ({
         nativeEvent: {
-          layout: {height},
+          layout: { height },
         },
       }) => {
         setHiddenTextHeight(height);
@@ -93,10 +93,10 @@ const ReadMore = memo(
 
     const textProps = collapsed
       ? {
-          onLayout: onTextLayout,
-          numberOfLines,
-          ellipsizeMode: 'tail',
-        }
+        onLayout: onTextLayout,
+        numberOfLines,
+        ellipsizeMode: 'tail',
+      }
       : {};
 
     return (
@@ -113,15 +113,13 @@ const ReadMore = memo(
         </TextComponent>
         <TextComponent {...restProps} style={style} {...textProps}>
           {children || ''}
+          {seeMore && collapsed && afterCollapsed && '\n'}
         </TextComponent>
         {seeMore && collapsed && afterCollapsed && (
           <View style={styles.seeMoreContainer}>
             <TouchableOpacity
               onPress={toggle}
-              style={[styles.seeMoreButton, {backgroundColor}]}>
-              <TextComponent {...restProps} style={style}>
-                {'... '}
-              </TextComponent>
+              style={[styles.seeMoreButton, { backgroundColor }]}>
               <Text style={seeMoreStyle}>{seeMoreText}</Text>
             </TouchableOpacity>
           </View>
@@ -148,16 +146,13 @@ const styles = StyleSheet.create({
     color: 'transparent',
   },
   seeMoreContainer: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    flexDirection: 'row',
+    marginTop: 5,
   },
   seeMoreButton: {
     flexDirection: 'row',
   },
   seeLessContainer: {
-    paddingVertical: 4,
+    marginTop: 5,
   },
   defaultText: {},
   seeMoreText: {
